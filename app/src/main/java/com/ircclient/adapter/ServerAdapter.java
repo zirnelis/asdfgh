@@ -1,4 +1,4 @@
-package org.ircclient.adapter;
+package com.ircclient.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -6,10 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-
-
 import com.ircclient.R;
-import org.ircclient.Server;
+import com.ircclient.Server;
 
 import java.util.ArrayList;
 

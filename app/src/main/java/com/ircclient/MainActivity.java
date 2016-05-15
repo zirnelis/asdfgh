@@ -1,4 +1,4 @@
-package org.ircclient;
+package com.ircclient;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.ircclient.R;
-import org.ircclient.activity.ServerSelectActivity;
+import com.ircclient.activity.ServerSelectActivity;
+
+import org.pircbotx.PircBotX;
+import org.pircbotx.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +40,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveButton() {
+
         Intent intent = new Intent(this, ServerSelectActivity.class);
         startActivity(intent);
+        Configuration arg = new Configuration.Builder()
+                .setName("Test Bot")
+                .setLogin("MrTestBot")
+                .setAutoNickChange(true)
+                .addServer("irc.esper.net",6667)
+                .buildConfiguration();
     }
 }
