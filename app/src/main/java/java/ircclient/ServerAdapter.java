@@ -13,9 +13,9 @@ import java.util.ArrayList;
 /**
  * Created by pfff on 15.05.2016.
  */
-public class Adapter extends ArrayAdapter<Server> {
+public class ServerAdapter extends ArrayAdapter<Server> {
 
-    public Adapter(Context context, ArrayList<Server> servers){
+    public ServerAdapter(Context context, ArrayList<Server> servers){
         super(context, 0, servers);
     }
 
