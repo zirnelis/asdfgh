@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         populateList();
-        registerClicks();
+
     }
 
     private void populateList() {   // Populate ListView
@@ -42,18 +42,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void registerClicks() {         // Register click + connect to selected server
-                                            // or transition to Add a new Server activity
-
-        // TODO add connection to server and transitioning to activity + Success/Fail msg
-        ListView list = (ListView) findViewById(R.id.textView_serverSelect);
-        list.setOnClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) viewClicked;
-                String msg = "Connecting to Server: " + textView.getText().toString();
-                Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT);
-            }
-        });
-    }
 }
