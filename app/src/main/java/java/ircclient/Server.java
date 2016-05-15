@@ -23,7 +23,7 @@ public class Server {
     }
 
 
-    String ipAddress;
-    String serverName;
+    private String ipAddress;
+    private String serverName;
 
 }
