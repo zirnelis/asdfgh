@@ -1,4 +1,4 @@
-package com.ircclient;
+package com.ircclient.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 
+import com.ircclient.R;
+import com.ircclient.Server;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +18,7 @@ import java.util.ArrayList;
  */
 public class ServerAdapter extends ArrayAdapter<Server> {
 
-    public ServerAdapter(Context context, ArrayList<Server> servers){
+    public ServerAdapter(Context context, ArrayList<Server> servers) {
         super(context, 0, servers);
     }
 
@@ -24,7 +27,7 @@ public class ServerAdapter extends ArrayAdapter<Server> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Server server = getItem(position);  // Get data for this position
         if(convertView == null) {           // Check if existing view is being reused
-            convertView = LayoutInflater.from (getContext()).inflate(R.layout.item_server,parent);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_server, parent);
         }
         // Lookup for view population
         TextView servName = (TextView) convertView.findViewById(R.id.serverName);
