@@ -1,4 +1,4 @@
-package java.ircclient;
+package com.ircclient;
 
 /**
  * Created by pfff on 15.05.2016.

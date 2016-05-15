@@ -1,12 +1,8 @@
-package java.ircclient;
+package com.ircclient;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,13 +28,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateList() {   // Populate ListView
-        // TODO created new adapter &  add server select
-        // Build adapter
-        Adapter adapter = new Adapter(this,listOfServers);
+        // TODO created new serverAdapter &  add server select
+        // Build serverAdapter
+        ServerAdapter serverAdapter = new ServerAdapter (this,listOfServers);
 
         // Configure list view
         ListView list = (ListView) findViewById(R.id.textView_serverSelect);
-        list.setAdapter(adapter);
+        try{
+            list.setAdapter(serverAdapter);
+        }catch(NullPointerException e) {
+
+        }
+
 
     }
 
