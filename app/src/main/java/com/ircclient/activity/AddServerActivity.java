@@ -1,17 +1,15 @@
 package com.ircclient.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.ircclient.R;
 
-import org.pircbotx.Configuration;
+import java.util.ArrayList;
 
 public class AddServerActivity extends AppCompatActivity {
 
@@ -20,7 +18,41 @@ public class AddServerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_server);
         Button saveBtn = (Button) findViewById(R.id.saveBtn);
-    }
+        EditText nameField = (EditText) findViewById(R.id.nameField);
+        EditText address = (EditText) findViewById(R.id.addressField);
+        EditText port = (EditText) findViewById(R.id.portField);
+        EditText nice = (EditText) findViewById(R.id.nickField);
+        EditText usrName = (EditText) findViewById(R.id.usernameField);
+        EditText realName = (EditText) findViewById(R.id.realNameField);
+        final ArrayList<EditText> lol = new ArrayList<>();
+        lol.add(nameField);
+        lol.add(address);
+        lol.add(port);
+        lol.add(nice);
+        lol.add(usrName);
+        lol.add(realName);
+
+        EditText.OnKeyListener myListener = new EditText.OnKeyListener(){
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == 66){
+                    for(int i = 0; i < lol.size(); i++) {
+                        if(lol.get(i).isFocused()) {
+                            lol.get(i + 1).requestFocus();
+                        }
+                    }
+                }
+                return false;
+            }
+        };
+
+        for(int i = 0; i < lol.size(); i++) {
+            lol.get(i).setOnKeyListener(myListener);
+        }
+
+
+
+        }
 
     public void addServer() {
         String name = ((EditText) findViewById(R.id.nameField)).getText().toString();
@@ -35,13 +67,5 @@ public class AddServerActivity extends AppCompatActivity {
         String realName = ((EditText) findViewById(R.id.realNameField)).getText().toString();
 
 
-        Configuration arg = new Configuration.Builder()
-                .setName(name)
-                .setLogin(nick)
-                .setAutoNickChange(true)
-                .addServer(address, port)
-                .buildConfiguration();
     }
-
-
 }

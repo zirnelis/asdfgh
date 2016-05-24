@@ -1,14 +1,13 @@
 package com.ircclient;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.Button;
 
-import com.ircclient.activity.ServerSelectActivity;
+import com.ircclient.activity.AddServerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,24 +18,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //populateList();
+        Button moveBtn = (Button) findViewById(R.id.moveBtn);
 
-        view = (ViewGroup) findViewById(R.id.listView_servers);
-        view.setOnTouchListener(
-                new RelativeLayout.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        moveButton();
-                        return true;
-                    }
-                }
-        );
+        moveBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AddServerActivity.class));
+            }
+        });
 
-    }
-
-    public void moveButton() {
-
-        Intent intent = new Intent(this, ServerSelectActivity.class);
-        startActivity(intent);
 
     }
 }

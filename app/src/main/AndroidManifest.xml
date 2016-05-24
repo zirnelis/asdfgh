@@ -15,8 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ServerSelectActivity">
-        </activity>
         <activity
             android:name=".activity.AddServerActivity"
             android:label="@string/title_activity_add_server"
