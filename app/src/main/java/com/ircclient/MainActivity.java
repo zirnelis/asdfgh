@@ -37,5 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ServerSelectActivity.class);
         startActivity(intent);
+
     }
 }
