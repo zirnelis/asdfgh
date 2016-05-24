@@ -10,12 +10,6 @@ import android.widget.RelativeLayout;
 
 import com.ircclient.activity.ServerSelectActivity;
 
-import org.pircbotx.PircBotX;
-import org.pircbotx.Configuration;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     ViewGroup view;
@@ -43,11 +37,5 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, ServerSelectActivity.class);
         startActivity(intent);
-        Configuration arg = new Configuration.Builder()
-                .setName("Test Bot")
-                .setLogin("MrTestBot")
-                .setAutoNickChange(true)
-                .addServer("irc.esper.net",6667)
-                .buildConfiguration();
     }
 }
