@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ircclient.R;
+import com.ircclient.Server;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,7 @@ public class AddServerActivity extends AppCompatActivity {
         String username = ((EditText) findViewById(R.id.usernameField)).getText().toString();
         String realName = ((EditText) findViewById(R.id.realNameField)).getText().toString();
 
+        Server newServer = new Server();
 
     }
 }

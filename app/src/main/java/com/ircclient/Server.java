@@ -38,5 +38,8 @@ public class Server {
     private String ipAddress;
     private String serverName;
     private String serverHostname;
+    private String nick;
+    private String userName;
+    private String realName;
     private int port;
 }
