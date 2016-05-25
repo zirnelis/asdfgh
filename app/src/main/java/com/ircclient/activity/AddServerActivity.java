@@ -1,18 +1,24 @@
 package com.ircclient.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.ircclient.MainActivity;
 import com.ircclient.R;
 import com.ircclient.Server;
+import com.ircclient.ServerList;
 
 import java.util.ArrayList;
 
 public class AddServerActivity extends AppCompatActivity {
+
+    ServerList serverList = new ServerList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,16 @@ public class AddServerActivity extends AppCompatActivity {
         lol.add(nice);
         lol.add(usrName);
         lol.add(realName);
+        Server sv = createServer(lol);
+        serverList.addServer(sv);
+        try {
+            serverList = (ServerList) getIntent().getSerializableExtra("serverList");
+        } catch(NullPointerException ex) {
+        }
+
+        if(serverList == null) {
+            serverList = new ServerList();
+        }
 
         EditText.OnKeyListener myListener = new EditText.OnKeyListener(){
             @Override
@@ -51,23 +67,54 @@ public class AddServerActivity extends AppCompatActivity {
             lol.get(i).setOnKeyListener(myListener);
         }
 
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(AddServerActivity.this, MainActivity.class);
+                try {
+                    Server sv = createServer(lol);
+                    serverList.addServer(sv);
+                    intent.putExtra("serverList", serverList);
+                } catch(NullPointerException ex) {
+                    Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
+                }
+                startActivity(intent);
+            }
+        });
+    }
 
+    public Server createServer(ArrayList<EditText> edit) {
 
-        }
-
-    public void addServer() {
-        String name = ((EditText) findViewById(R.id.nameField)).getText().toString();
-        String address = ((EditText) findViewById(R.id.addressField)).getText().toString();
-        String portTmp = ((EditText) findViewById(R.id.portField)).getText().toString();
+        String name = "Random Server";
+        String address = "address.address.com";
         int port = 6667;
-        if(!portTmp.contains("(")) {
-            port = Integer.parseInt(portTmp);
+        String nick = "cool nick";
+        String username = "cool username";
+        String realName = "Valdis Kusa";
+        String portTmp = "";
+        try {
+            if(edit.get(0).getText().toString().length() > 0)
+                name = edit.get(0).getText().toString();
+            if(edit.get(1).getText().toString().length() > 0)
+                address = edit.get(1).getText().toString();
+            if(edit.get(2).getText().toString().length() > 0)
+                portTmp = edit.get(2).getText().toString();
+            if(!portTmp.isEmpty()) {
+                port = Integer.parseInt(portTmp);
+            }
+            if(edit.get(3).getText().toString().length() > 0)
+                nick = edit.get(3).getText().toString();
+            if(edit.get(4).getText().toString().length() > 0)
+                username = edit.get(4).getText().toString();
+            if(edit.get(5).getText().toString().length() > 0)
+                realName = edit.get(5).getText().toString();
+        } catch(NullPointerException ex) {
+            ex.toString();
         }
-        String nick = ((EditText) findViewById(R.id.nickField)).getText().toString();
-        String username = ((EditText) findViewById(R.id.usernameField)).getText().toString();
-        String realName = ((EditText) findViewById(R.id.realNameField)).getText().toString();
+        Server sv = new Server(name, address, port, nick, username, realName);
 
-        Server newServer = new Server();
+        return sv;
 
     }
 }
+
+

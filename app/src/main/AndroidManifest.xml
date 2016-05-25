@@ -20,6 +20,10 @@
             android:label="@string/title_activity_add_server"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".activity.ConnectActivity">
+        </activity>
+        <activity android:name=".activity.ChatActivity">
+        </activity>
     </application>
 
 </manifest>

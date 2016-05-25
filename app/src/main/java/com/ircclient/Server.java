@@ -1,25 +1,31 @@
 package com.ircclient;
 
+import java.io.Serializable;
+
 /**
  * Created by pfff on 15.05.2016.
  */
-public class Server {
+public class Server implements Serializable {
+    private String serverName;
+    private String serverHostname;
+    private String nick;
+    private String userName;
+    private String realName;
+    private int port;
+
     public Server() {
         this.serverName = "";
-        this.ipAddress = "";
         this.port = 0;
         this.serverHostname = "";
     }
 
-    public Server(String ipAddress, String serverName, String serverHostname, int port) {
-        this.ipAddress = ipAddress;
+    public Server(String serverName, String serverHostname, int port, String nick, String userName, String realName) {
         this.serverName = serverName;
         this.port = port;
         this.serverHostname = serverHostname;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
+        this.nick = nick;
+        this.userName = userName;
+        this.realName = realName;
     }
 
     public String getServerName() {
@@ -34,12 +40,15 @@ public class Server {
         return port;
     }
 
+    public String getNick() {
+        return nick;
+    }
 
-    private String ipAddress;
-    private String serverName;
-    private String serverHostname;
-    private String nick;
-    private String userName;
-    private String realName;
-    private int port;
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
 }

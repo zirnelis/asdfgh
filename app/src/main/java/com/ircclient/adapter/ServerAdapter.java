@@ -3,37 +3,51 @@ package com.ircclient.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.view.LayoutInflater;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.ircclient.R;
-import com.ircclient.Server;
 
-import java.util.ArrayList;
+import com.ircclient.R;
+import com.ircclient.ServerList;
 
 /**
  * Created by pfff on 15.05.2016.
  */
-public class ServerAdapter extends ArrayAdapter<Server> {
+public class ServerAdapter extends BaseAdapter {
 
-    public ServerAdapter(Context context, ArrayList<Server> servers) {
-        super(context, 0, servers);
+    private Context mContext;
+    private ServerList mServerList;
+
+    public ServerAdapter(ServerList mServerList, Context mContext) {
+        this.mServerList = mServerList;
+        this.mContext = mContext;
     }
 
 
+
+    @Override
+    public int getCount() {
+        return mServerList.getList().size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mServerList.getList().get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Server server = getItem(position);  // Get data for this position
-        if(convertView == null) {           // Check if existing view is being reused
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_server, parent);
-        }
-        // Lookup for view population
-        TextView servName = (TextView) convertView.findViewById(R.id.serverName);
-        TextView ipAddress = (TextView) convertView.findViewById(R.id.ipAddress);
-        // Gets data for template view
-        servName.setText(server.getServerName());
-        ipAddress.setText(server.getIpAddress());
+        View v = View.inflate(mContext, R.layout.item_server_list, null);
+        TextView serverName = (TextView) v.findViewById(R.id.server_name);
+        TextView serverHostname = (TextView) v.findViewById(R.id.server_hostname);
+        serverName.setText(mServerList.getList().get(position).getServerName());
+        serverHostname.setText(mServerList.getList().get(position).getServerHostname());
 
-        return convertView;                 // Return completed view
+        v.setTag(mServerList.getList().get(position));
+        return v;
     }
 }
