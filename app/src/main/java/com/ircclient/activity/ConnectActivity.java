@@ -38,7 +38,7 @@ public class ConnectActivity extends AppCompatActivity {
         }
 
         final ListView servList = (ListView) findViewById(R.id.servList_);
-        ServerAdapter adapter = new ServerAdapter(serverList, getApplicationContext());
+        final ServerAdapter adapter = new ServerAdapter(serverList, getApplicationContext());
         try {
             servList.setAdapter(adapter);
         } catch(NullPointerException ex) {
@@ -49,6 +49,7 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 serverList.remove(position);
+                adapter.notifyDataSetChanged();
                 return false;
             }
         });
@@ -57,10 +58,12 @@ public class ConnectActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ConnectActivity.this, ChatActivity.class);
-                intent.putExtra("serverList", serverList);
+                Bundle extras = new Bundle();
+                extras.putSerializable("serverList", serverList);
+                extras.putInt("position", position);
+                intent.putExtra("extras", extras);
                 startActivity(intent);
             }
         });
-
     }
 }
